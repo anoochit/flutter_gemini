@@ -54,9 +54,8 @@ class ChatInputBoxView extends GetView<HomeController> {
   }
 
   sendMessage({required String text, required BuildContext context}) async {
-    // TODO : sent message to gemini api
+    // sent message to gemini api
     if (text.trim().isNotEmpty) {
-      // TODO: send text to api
       controller.chats.add(
         Content(
           role: 'user',
@@ -69,7 +68,7 @@ class ChatInputBoxView extends GetView<HomeController> {
         if (!controller.chats.isNotEmpty &&
             (controller.chats.last.role != value?.content?.role)) {
           controller.chats.last.parts?.last.text =
-              '${controller.chats.last.parts!.last.text}${value?.output}';
+              '${controller.chats.last.parts?.last.text}${value?.output}';
         } else {
           controller.chats.add(
             Content(

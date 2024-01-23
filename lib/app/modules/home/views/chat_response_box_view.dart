@@ -31,7 +31,7 @@ class ChatResponseBoxView extends GetView<HomeController> {
                       child: MarkdownWidget(
                         shrinkWrap: true,
                         selectable: true,
-                        data: controller.chats[index].parts!.last.text!,
+                        data: '${controller.chats[index].parts?.last.text}',
                       ),
                     ),
                   ],
