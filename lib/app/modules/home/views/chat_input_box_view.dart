@@ -56,5 +56,37 @@ class ChatInputBoxView extends GetView<HomeController> {
 
   sendMessage({required String text, required BuildContext context}) async {
     // TODO : sent message to gemini api
+    if (text.trim().isNotEmpty) {
+      // TODO: send text to api
+      controller.chats.add(
+        Content(
+          role: 'user',
+          parts: [Parts(text: text)],
+        ),
+      );
+      controller.waiting.value = true;
+
+      gemini.chat(controller.chats).then((value) {
+        if (!controller.chats.isNotEmpty &&
+            (controller.chats.last.role != value?.content?.role)) {
+          controller.chats.last.parts?.last.text =
+              '${controller.chats.last.parts!.last.text}${value?.output}';
+        } else {
+          controller.chats.add(
+            Content(
+              role: 'model',
+              parts: [
+                Parts(text: value?.output),
+              ],
+            ),
+          );
+        }
+
+        controller.waiting.value = false;
+        Get.back();
+      }).catchError((error) {
+        Get.back();
+      });
+    }
   }
 }

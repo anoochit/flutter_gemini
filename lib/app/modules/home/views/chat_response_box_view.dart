@@ -16,12 +16,11 @@ class ChatResponseBoxView extends GetView<HomeController> {
           itemBuilder: (BuildContext context, int index) {
             return Column(
               children: [
-                Flex(
-                  direction: Axis.horizontal,
+                Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CircleAvatar(
-                      child: (controller.chats[index].isBot)
+                      child: (controller.chats[index].role == 'model')
                           ? const Icon(Icons.smart_toy_outlined)
                           : const Icon(Icons.account_circle_outlined),
                     ),
@@ -32,7 +31,7 @@ class ChatResponseBoxView extends GetView<HomeController> {
                       child: MarkdownWidget(
                         shrinkWrap: true,
                         selectable: true,
-                        data: controller.chats[index].content,
+                        data: controller.chats[index].parts!.last.text!,
                       ),
                     ),
                   ],
