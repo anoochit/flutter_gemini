@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
-import 'package:gemini_chat/app/data/models/chat_item.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
